@@ -1,11 +1,13 @@
+import client from '../config/db.js'
 
+export const getAllUsers = () => {
 
-export const getAllUsers = () => {}
+}
 
-export const createUser = () => {}
+export const getUser = (id) => {}
 
-export const getUser = () => {}
+export const createUser = (nome, email, senha, telefone) => {}
 
-export const updateUser = () => {}
+export const updateUser = (id, nome, email, senha, telefone) => {}
 
-export const deleteUser = () => {}
+export const deleteUser = (id) => {}

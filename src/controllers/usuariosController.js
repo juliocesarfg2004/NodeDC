@@ -1,4 +1,4 @@
-
+import * as usuariosService from '../services/usuariosService.js'
 
 export const getAllUsers = async (req, res) => {
     try {
