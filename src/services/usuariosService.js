@@ -12,24 +12,32 @@ export const getUser = async (id) => {
 
 export const createUser = async (nome, email, senha, telefone) => {
     const usuario = await usuariosRepository.getUserByEmail(email)
-    if(usuario) {
-        throw new Error("Email já cdastrado")
+    if (usuario) {
+        // throw new Error("Email já cdastrado")
+        const error = new Error("Email já cdastrado")
+        error.status(409)
+        throw error
     }
     return await usuariosRepository.createUser(nome, email, senha, telefone)
 }
 
 export const updateUser = async (id, nome, email, senha, telefone) => {
     const usuario = await usuariosRepository.getUser(id)
-    if(!usuario) {
-        throw new Error("Usuário não encontrado");
+    if (!usuario) {
+        // throw new Error("Usuário não encontrado")
+        const error = new Error("Usuário não encontrado")
+        error.status(404)
+        throw error
     }
     return await usuariosRepository.updateUser(id, nome, email, senha, telefone)
 }
 
 export const deleteUser = async (id) => {
     const usuario = await usuariosRepository.getUser(id)
-    if(!usuario) {
-        throw new Error("Usuário não encontrado");
+    if (!usuario) {
+        const error = new Error("Usuário não encontrado")
+        error.status(404)
+        throw error
     }
     return await usuariosRepository.deleteUser(id)
 }
