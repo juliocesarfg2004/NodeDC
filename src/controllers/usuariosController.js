@@ -22,7 +22,7 @@ export const createUser = async (req, res) => {
     const { nome, email, senha, telefone } = req.body
     try {
         if (!nome || !email || !senha || !telefone) {
-            return res.status(400).jsonn({ message: "Todos os campos são obrigatórios" })
+            return res.status(400).json({ message: "Todos os campos são obrigatórios" })
         }
         const usuarioCriado = await usuariosService.createUser(nome, email, senha, telefone)
         return res.status(201).json(usuarioCriado)
@@ -38,7 +38,7 @@ export const updateUser = async (req, res) => {
     const { nome, email, senha, telefone } = req.body
     try {
         if (!nome || !email || !senha || !telefone) {
-            return res.status(400).jsonn({ message: "Todos os campos são obrigatórios" })
+            return res.status(400).json({ message: "Todos os campos são obrigatórios" })
         }
         const usuarioAlterado = await usuariosService.updateUser(id, nome, email, senha, telefone)
         return res.status(200).json(usuarioAlterado)
