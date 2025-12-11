@@ -1,13 +1,13 @@
-import express from 'express'
-import * as usuariosController from '../controllers/usuariosController.js'
+import express from "express";
+import * as usuariosController from "../controllers/usuariosController.js";
 
-const router = express.Router()
+const router = express.Router();
 
-router.get('/', usuariosController.getAllUsers)
+router.get("/", usuariosController.getAllUsers);
 // rota para buscar um usuario: '/users/1'
-router.get('/:id', usuariosController.getUser)
-router.post('/', usuariosController.createUser)
-router.put('/:id', usuariosController.updateUser)
-router.delete('/:id', usuariosController.deleteUser)
+router.get("/:id", usuariosController.getUser);
+router.post("/", usuariosController.createUser);
+router.put("/:id", usuariosController.updateUser);
+router.delete("/:id", usuariosController.deleteUser);
 
-export default router
+export default router;

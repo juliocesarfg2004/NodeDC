@@ -1,10 +1,9 @@
 import express from "express";
 import usuariosRoute from './routes/usuariosRoute.js'
-import db from './config/db.js'
 
 // app recebe as funcionalidades do express
 const app = express();
-app.use(express.json())
+app.use(express.json());
 
 const port = 3000;
 
@@ -14,7 +13,7 @@ app.get("/", (req, res) => {
 });
 
 // Usar rotas em usuários routes
-app.use('/users', usuariosRoute)
+app.use('/users', usuariosRoute);
 
 // Escutar o servidor - Recebe 2 parâmetros
 app.listen(port, () => console.log(`Servidor rodando na porta http://localhost:${port}`));
