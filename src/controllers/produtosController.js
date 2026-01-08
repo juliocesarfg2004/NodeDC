@@ -23,7 +23,7 @@ const getProduct = async (req, res) => {
 const createProduct = async (req, res) => {
     const {nome, codigo, valor_unitario, categoria_id} = req.body;
     try {
-        if(!nome || !codigo || !valor_unitario || !categoria_id) {
+        if(!nome || !codigo || !valor_unitario ) {
             return res.status(400).json({message: "Esses campos são obrigatórios"});
         };
         const produtoCriado = await produtosService.createProduct(nome, codigo, valor_unitario, categoria_id);
@@ -39,18 +39,18 @@ const createProduct = async (req, res) => {
  const updateProduct = async (req, res) => {
     const { id } = req.params;
     const { nome, codigo, valor_unitario, categoria_id } = req.body
-    try {
+    // try {
         if (!nome || !codigo || !valor_unitario || !categoria_id) {
             return res.status(400).json({ message: "Esses campos são obrigatórios" })
         }
-        const produtoAlterado = await produtosService.updateUser(id, nome, codigo, valor_unitario, categoria_id)
+        const produtoAlterado = await produtosService.updateProduct(id, nome, codigo, valor_unitario, categoria_id)
         return res.status(200).json(produtoAlterado)
-    } catch (error) {
-        if(error.status === 404) {
-            return res.status(404).json({message: error.message})
-        }
-        return res.status(500).json({ message: "Erro ao alterar produto", error })
-    };
+    // } catch (error) {
+    //     if(error.status === 404) {
+    //         return res.status(404).json({message: error.message})
+    //     }
+    //     return res.status(500).json({ message: "Erro ao alterar produto", error })
+    // };
 };
 
 const deleteProduct = async (req, res) => {

@@ -29,9 +29,7 @@ export const createCategory = async (req, res) => {
         const categoriaCriada = await categoriasService.createCategory(nome);
         return res.status(201).json(categoriaCriada);
     } catch (error) {
-        if(error.status === 409) {
-            return res.status(404).json({message: error.message})
-        };
+
         return res.status(500).json({ message: "Erro ao criar a categoria", error });
     };
 };

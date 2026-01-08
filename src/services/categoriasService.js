@@ -10,7 +10,7 @@ export const getCategory = async (id) => {
 };
 
 export const createCategory = async (nome) => {
-    return await categoriasRepository.createProduct(nome);
+    return await categoriasRepository.createCategory(nome);
 };
 
 export const updateCategory = async (id, nome) => {

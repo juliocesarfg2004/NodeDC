@@ -1,6 +1,6 @@
 import prisma from "../config/db.js";
 
-export const getAllProducts = async () => {
+const getAllProducts = async () => {
   return await prisma.products.findMany({
     select: {
       id: true,
@@ -12,15 +12,15 @@ export const getAllProducts = async () => {
   })
 };
 
-export const getProduct = async (id) => {
+const getProduct = async (id) => {
   return await prisma.products.findUnique({
     where: { id: Number(id) }
   })
 };
 
-export const createProduct = async (nome, codigo, valor_unitario, categoria_id) => {
+const createProduct = async (nome, codigo, valor_unitario, categoria_id) => {
   return await prisma.products.create({
-    data: { nome, codigo, valor_unitario, categoria_id},
+    data: { nome, codigo, valor_unitario: Number(valor_unitario), categoria_id: Number(categoria_id)},
     select: {
       id: true,
       nome: true,
@@ -31,25 +31,35 @@ export const createProduct = async (nome, codigo, valor_unitario, categoria_id) 
   })
 };
 
-export const getProductByCodigo = async (codigo) => {
+const getProductByCodigo = async (codigo) => {
   return await prisma.products.findUnique({
     where: { codigo }
   })
 }
 
-export const updateProduct = async (id, nome, codigo, valor_unitario) => {
+const updateProduct = async (id, nome, codigo, valor_unitario, categoria_id) => {
   return await prisma.products.update({
     where: { id: Number(id) },
     data: {
       nome,
       codigo,
-      valor_unitario
+      valor_unitario: Number(valor_unitario),
+      categoria_id: Number(categoria_id)
     }
   });
 };
 
-export const deleteProduct = async (id) => {
+const deleteProduct = async (id) => {
   return await prisma.products.delete({
     where: { id: Number(id) }
   })
 };
+
+export {
+    getAllProducts,
+    getProduct,
+    createProduct,
+    getProductByCodigo,
+    updateProduct,
+    deleteProduct
+}

@@ -1,35 +1,38 @@
 // Camada responsável pela lógica - integridade das regras de negocio
 import * as produtosRepository from '../repositories/produtosRepository.js'
 
-export const getAllProducts = async () => {
+const getAllProducts = async () => {
     return await produtosRepository.getAllProducts();
 };
 
-export const getProduct = async (id) => {
+const getProduct = async (id) => {
     return await produtosRepository.getProduct(id);
 };
 
-export const createProduct = async (nome, codigo, valor_unitario, categoria_id) => {
+const createProduct = async (nome, codigo, valor_unitario, categoria_id) => {
     const produto = await produtosRepository.getProductByCodigo(codigo);
     if (produto) {
         const error = new Error("Código já cadastrado");
         error.status = 409; // Conflict
         throw error;
     };
-    return await produtosRepository.createProduct(nome, codigo, valor_unitario, categoria_id);
+    console.log("passou da verificação do código")
+    const produtoCriado =  await produtosRepository.createProduct(nome, codigo, valor_unitario, categoria_id)
+    console.log(produtoCriado)
+    return produtoCriado
 };
 
-export const updateProduct = async (id, nome, codigo, valor_unitario) => {
+const updateProduct = async (id, nome, codigo, valor_unitario, categoria_id) => {
     const produto = await produtosRepository.getProduct(id);
     if (!produto) {
         const error = new Error("Produto não encontrado");
         error.status = 404;
         throw error;
     };
-    return await produtosRepository.updateProduct(id, nome, codigo, valor_unitario);
+    return await produtosRepository.updateProduct(id, nome, codigo, valor_unitario, categoria_id);
 };
 
-export const deleteProduct = async (id) => {
+const deleteProduct = async (id) => {
     const produto = await produtosRepository.getProduct(id);
     if (!produto) {
         const error = new Error("Produto não encontrado");
@@ -37,4 +40,12 @@ export const deleteProduct = async (id) => {
         throw error;
     }
     return await produtosRepository.deleteProduct(id);
+}
+
+export {
+    getAllProducts,
+    getProduct,
+    createProduct,
+    updateProduct,
+    deleteProduct
 }

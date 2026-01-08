@@ -29,7 +29,10 @@ export const updateUser = async (id, nome, email, senha, telefone) => {
         error.status = 404
         throw error
     }
-    return await usuariosRepository.updateUser(id, nome, email, senha, telefone)
+    console.log("passou da verificação do email")
+    const usuarioCriado =  await usuariosRepository.createUser(nome, email, senha, telefone)
+    console.log(usuarioCriado)
+    return usuarioCriado
 }
 
 export const deleteUser = async (id) => {
