@@ -1,6 +1,6 @@
 import * as usuariosService from '../services/usuariosService.js'
 
-export const getAllUsers = async (req, res) => {
+export const getAllUsers = async (_req, res) => {
     try {
         const users = await usuariosService.getAllUsers()
         return res.status(200).json(users)
@@ -18,21 +18,7 @@ export const getUser = async (req, res) => {
         return res.status(500).json({ message: "Erro ao buscar usuários", error });
     }
 }
-export const createUser = async (req, res) => {
-    const { nome, email, senha, telefone } = req.body
-    try {
-        if (!nome || !email || !senha) {
-            return res.status(400).json({ message: "Esses campos são obrigatórios" });
-        }
-        const usuarioCriado = await usuariosService.createUser(nome, email, senha, telefone)
-        return res.status(201).json(usuarioCriado)
-    } catch (error) {
-        if(error.status === 409) {
-            return res.status(404).json({message: error.message})
-        }
-        return res.status(500).json({ message: "Erro ao criar o usuário", error })
-    }
-}
+
 export const updateUser = async (req, res) => {
     const { id } = req.params;
     const { nome, email, senha, telefone } = req.body

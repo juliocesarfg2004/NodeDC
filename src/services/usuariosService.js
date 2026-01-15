@@ -10,17 +10,6 @@ export const getUser = async (id) => {
     return await usuariosRepository.getUser(id)
 }
 
-export const createUser = async (nome, email, senha, telefone) => {
-    const usuario = await usuariosRepository.getUserByEmail(email)
-    if (usuario) {
-        // throw new Error("Email já cdastrado")
-        const error = new Error("Email já cadastrado")
-        error.status = 409 // Conflict
-        throw error
-    }
-    return await usuariosRepository.createUser(nome, email, senha, telefone)
-}
-
 export const updateUser = async (id, nome, email, senha, telefone) => {
     const usuario = await usuariosRepository.getUser(id)
     if (!usuario) {
