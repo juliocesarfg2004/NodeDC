@@ -3,10 +3,15 @@ import usuariosRoute from './routes/usuariosRoute.js'
 import produtosRoute from './routes/produtosRoute.js'
 import categoriasRoute from './routes/categoriasRoute.js'
 import authRoute from './routes/authRoute.js'
+import { authMiddleware } from "./middleware/authMiddleware.js";
+import cors from 'cors'
 
 // app recebe as funcionalidades do express
 const app = express();
 app.use(express.json());
+app.use(cors({
+  origin: "http://localhost:5173"
+}))
 
 const port = 3000;
 
@@ -16,9 +21,9 @@ app.get("/", (_req, res) => {
 });
 
 // Usar rotas em usuários routes
-app.use('/users', usuariosRoute);
-app.use('/products', produtosRoute);
-app.use('/categories', categoriasRoute);
+app.use('/users', authMiddleware ,usuariosRoute);
+app.use('/products', authMiddleware, produtosRoute);
+app.use('/categories', authMiddleware, categoriasRoute);
 app.use('/auth', authRoute);
 
 // Escutar o servidor - Recebe 2 parâmetros
